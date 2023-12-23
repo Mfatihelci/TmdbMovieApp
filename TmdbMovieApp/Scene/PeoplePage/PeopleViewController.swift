@@ -25,8 +25,12 @@ class PeopleViewController: UIViewController {
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(PeoplePageCollectionViewCell.self, forCellWithReuseIdentifier: PeoplePageCollectionViewCell.Identifier.path.rawValue)
         return collectionView
     }()
+    
+    let peoplePageProvider = PeoplePageCollectionProvider()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initDelegate()
@@ -35,6 +39,8 @@ class PeopleViewController: UIViewController {
     private func initDelegate() {
         view.addSubview(label)
         view.addSubview(collectionView)
+        collectionView.delegate = peoplePageProvider
+        collectionView.dataSource = peoplePageProvider
         makeLabel()
         makeCollectionView()
     }

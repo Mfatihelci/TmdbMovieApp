@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class TelevisionViewController: UIViewController {
     private let label: UILabel = {
@@ -20,8 +21,12 @@ class TelevisionViewController: UIViewController {
     private let tableView: UITableView = {
        let table = UITableView()
         table.backgroundColor = .white
+        table.register(TelevisionPageCellTableViewCell.self, forCellReuseIdentifier: TelevisionPageCellTableViewCell.Identifier.path.rawValue)
         return table
     }()
+    
+    let televisionPageProvider = TelevisionPageTableViewProvider()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initDelegate()
@@ -30,6 +35,8 @@ class TelevisionViewController: UIViewController {
     private func initDelegate() {
         view.addSubview(label)
         view.addSubview(tableView)
+        tableView.delegate = televisionPageProvider
+        tableView.dataSource = televisionPageProvider
         makeLabel()
         makeTableView()
     }

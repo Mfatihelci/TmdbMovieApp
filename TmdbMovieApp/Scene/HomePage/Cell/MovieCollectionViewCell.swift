@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
     private lazy var image: UIImageView = {
@@ -65,7 +66,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
 extension MovieCollectionViewCell {
     private func makeImage() {
         image.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(15)
+            make.top.equalTo(contentView).offset(15)
             make.left.equalTo(contentView).offset(10)
             make.right.equalTo(contentView).inset(10)
             make.height.equalTo(140)

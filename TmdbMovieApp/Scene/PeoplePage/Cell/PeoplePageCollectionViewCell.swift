@@ -1,14 +1,14 @@
 //
-//  ActorCollectionViewCell.swift
+//  PeoplePageCollectionViewCell.swift
 //  TmdbMovieApp
 //
-//  Created by Muhammed fatih Elçi on 22.12.2023.
+//  Created by Muhammed fatih Elçi on 23.12.2023.
 //
 
 import UIKit
 import SnapKit
 
-class ActorCollectionViewCell: UICollectionViewCell {
+class PeoplePageCollectionViewCell: UICollectionViewCell {
     private lazy var image: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 15
@@ -63,7 +63,7 @@ class ActorCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension ActorCollectionViewCell {
+extension PeoplePageCollectionViewCell {
     private func makeImage() {
         image.snp.makeConstraints { make in
             make.top.equalTo(contentView).offset(15)

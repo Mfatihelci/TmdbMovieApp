@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MovieViewController: UIViewController {
     
@@ -22,9 +23,12 @@ class MovieViewController: UIViewController {
     private let tableView: UITableView = {
        let table = UITableView()
         table.backgroundColor = .white
+        table.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.Identifier.path.rawValue)
         return table
     }()
 
+    let moviePageProvider = MoviePageTableViewProvider()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initDelegate()
@@ -32,6 +36,8 @@ class MovieViewController: UIViewController {
     private func initDelegate() {
         view.addSubview(label)
         view.addSubview(tableView)
+        tableView.dataSource = moviePageProvider
+        tableView.delegate = moviePageProvider
         makeLabel()
         makeTableView()
     }
