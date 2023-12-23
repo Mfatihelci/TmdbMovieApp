@@ -1,13 +1,13 @@
 //
-//  TvCollectionViewCell.swift
+//  SearchTableViewCell.swift
 //  TmdbMovieApp
 //
-//  Created by Muhammed fatih Elçi on 22.12.2023.
+//  Created by Muhammed fatih Elçi on 23.12.2023.
 //
 
 import UIKit
 
-class TvCollectionViewCell: UICollectionViewCell {
+class SearchTableViewCell: UITableViewCell {
     private lazy var image: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 15
@@ -20,18 +20,18 @@ class TvCollectionViewCell: UICollectionViewCell {
     
     private lazy var name: UILabel = {
        let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 15)
+        label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .black
-        label.textAlignment = .center
+        label.textAlignment = .left
         addSubview(label)
         return label
     }()
     
     private lazy var released: UILabel = {
        let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 15)
+        label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .black
-        label.textAlignment = .center
+        label.textAlignment = .left
         addSubview(label)
         return label
     }()
@@ -40,8 +40,8 @@ class TvCollectionViewCell: UICollectionViewCell {
         case path = "Cell"
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
         saveModel()
     }
@@ -62,29 +62,29 @@ class TvCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension TvCollectionViewCell {
+extension SearchTableViewCell {
     private func makeImage() {
         image.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(15)
+            make.top.equalTo(contentView).offset(0)
             make.left.equalTo(contentView).offset(10)
-            make.right.equalTo(contentView).inset(10)
-            make.height.equalTo(140)
+            make.height.equalTo(150)
+            make.width.equalTo(150)
         }
     }
     private func makeName() {
         name.snp.makeConstraints { make in
-            make.top.equalTo(image.snp.bottom).offset(0)
-            make.centerX.equalTo(image)
+            make.top.equalTo(contentView).offset(20)
+            make.left.equalTo(image.snp.right).offset(10)
             make.width.equalTo(100)
-            make.height.equalTo(20)
+            make.width.equalTo(30)
         }
     }
     private func makeReleased() {
         released.snp.makeConstraints { make in
-            make.top.equalTo(name.snp.bottom).offset(0)
-            make.centerX.equalTo(name)
+            make.top.equalTo(name.snp.bottom).offset(10)
+            make.left.equalTo(image.snp.right).offset(10)
+            make.height.equalTo(30)
             make.width.equalTo(100)
-            make.height.equalTo(20)
         }
     }
 }

@@ -26,6 +26,7 @@ class HomeViewController: UIViewController {
         layout.minimumInteritemSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
+        collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: MovieCollectionViewCell.Identifier.path.rawValue)
         return collectionView
     }()
     
@@ -45,6 +46,7 @@ class HomeViewController: UIViewController {
         layout.minimumInteritemSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
+        collectionView.register(TvCollectionViewCell.self, forCellWithReuseIdentifier: TvCollectionViewCell.Identifier.path.rawValue)
         return collectionView
     }()
     
@@ -64,6 +66,7 @@ class HomeViewController: UIViewController {
         layout.minimumInteritemSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
+        collectionView.register(ActorCollectionViewCell.self, forCellWithReuseIdentifier: ActorCollectionViewCell.Identifier.path.rawValue)
         return collectionView
     }()
     
@@ -101,6 +104,10 @@ class HomeViewController: UIViewController {
         return segment
     }()
 
+    let moviePageProvider = MovieListProvider()
+    let televisionProvider = TelevisionListProvider()
+    let actorProvider = ActorListProvider()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -112,6 +119,12 @@ class HomeViewController: UIViewController {
     
     private func initDelegate() {
         scrollView.delegate = self
+        collectionViewOne.dataSource = moviePageProvider
+        collectionViewOne.delegate = moviePageProvider
+        collectionViewTwo.dataSource = televisionProvider
+        collectionViewTwo.delegate = televisionProvider
+        collectionViewThree.dataSource = actorProvider
+        collectionViewThree.delegate = actorProvider
     }
     
     private func drawDesing() {

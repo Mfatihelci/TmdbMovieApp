@@ -17,9 +17,12 @@ class SearchViewController: UIViewController {
 
     private let tableView: UITableView = {
        let table = UITableView()
-        table.backgroundColor = .black
+        table.backgroundColor = .white
+        table.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.Identifier.path.rawValue)
         return table
     }()
+    
+    let searchProvider = SearchTableViewProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +33,8 @@ class SearchViewController: UIViewController {
     private func initDelegate() {
         searchBar.searchResultsUpdater = self
         navigationItem.searchController = searchBar
+        tableView.dataSource = searchProvider
+        tableView.delegate = searchProvider
         view.addSubview(tableView)
         makeTableView()
     }
@@ -43,7 +48,7 @@ extension SearchViewController: UISearchResultsUpdating {
 extension SearchViewController {
     private func makeTableView() {
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(0)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             make.left.equalTo(view).offset(0)
             make.right.equalTo(view).offset(0)
             make.bottom.equalTo(view).offset(0)
