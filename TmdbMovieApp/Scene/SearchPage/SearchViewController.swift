@@ -8,22 +8,45 @@
 import UIKit
 
 class SearchViewController: UIViewController {
+    
+    private let searchBar: UISearchController = {
+       let search = UISearchController()
+        search.searchBar.placeholder = "Ara"
+        return search
+    }()
 
+    private let tableView: UITableView = {
+       let table = UITableView()
+        table.backgroundColor = .black
+        return table
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        initDelegate()
+        view.backgroundColor = .white
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func initDelegate() {
+        searchBar.searchResultsUpdater = self
+        navigationItem.searchController = searchBar
+        view.addSubview(tableView)
+        makeTableView()
     }
-    */
 
+}
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        print(searchBar.searchBar.text ?? "error")
+    }
+}
+extension SearchViewController {
+    private func makeTableView() {
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(0)
+            make.left.equalTo(view).offset(0)
+            make.right.equalTo(view).offset(0)
+            make.bottom.equalTo(view).offset(0)
+        }
+    }
 }

@@ -7,19 +7,8 @@
 
 import UIKit
 import SnapKit
-import Kingfisher
 
 class HomeViewController: UIViewController {
-    
-    private let imageView: UIImageView = {
-        let image = UIImageView()
-        image.layer.cornerRadius = 15
-        image.layer.masksToBounds = true
-        let imageUrlString = "https://tr.web.img2.acsta.net/pictures/23/05/08/09/02/2465323.jpg"
-                let imageUrl = URL(string: imageUrlString)
-                image.kf.setImage(with: imageUrl)
-        return image
-    }()
     
     private let labelOne: UILabel = {
         let label = UILabel()
@@ -36,6 +25,7 @@ class HomeViewController: UIViewController {
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white
         return collectionView
     }()
     
@@ -54,6 +44,7 @@ class HomeViewController: UIViewController {
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white
         return collectionView
     }()
     
@@ -72,6 +63,7 @@ class HomeViewController: UIViewController {
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white
         return collectionView
     }()
     
@@ -80,7 +72,7 @@ class HomeViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.isScrollEnabled = true
         scrollView.bounces = true
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = .black
         scrollView.contentSize = CGSize(width: 0, height: view.frame.height)
         return scrollView
     }()
@@ -115,120 +107,96 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .black
         drawDesing()
         makeFunc()
+        initDelegate()
+    }
+    
+    private func initDelegate() {
+        scrollView.delegate = self
     }
     
     private func drawDesing() {
-        view.addSubview(imageView)
-        view.addSubview(labelOne)
-        view.addSubview(collectionViewOne)
-        view.addSubview(labelTwo)
-        view.addSubview(collectionViewTwo)
-        view.addSubview(labelThree)
-        view.addSubview(collectionViewThree)
         view.addSubview(scrollView)
-        view.addSubview(segmentControlOne)
-        view.addSubview(segmentControlTwo)
-        view.addSubview(segmentControlThree)
     }
     
     private func makeFunc() {
-        makeImageView()
-        makeLabelOne()
-        makeCollectionViewOne()
-        makeLabelTwo()
-        makeCollectionViewTwo()
-        makeLabelThree()
-        makeCollectionViewThree()
         makeScrollView()
-        makeSegmentOne()
-        makeSegmentTwo()
-        makeSegmentThree()
     }
 }
 
+extension HomeViewController: UIScrollViewDelegate { }
 extension HomeViewController {
-    private func makeImageView() {
-        imageView.snp.makeConstraints { make in
-            make.top.equalTo(view).offset(0)
-            make.left.right.equalTo(view).offset(0)
-            make.height.equalTo(view.frame.height / 2.2)
-        }
-    }
-
-    private func makeLabelOne() {
-        labelOne.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(5)
-            make.left.equalTo(view).offset(0)
-            make.width.equalTo(150)
-            make.height.equalTo(40)
-        }
-    }
-    private func makeSegmentOne() {
-        segmentControlOne.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(5)
-            make.left.equalTo(labelOne.snp.right).offset(5)
-            make.height.equalTo(35)
-            make.width.equalTo(180)
-        }
-    }
-    private func makeCollectionViewOne() {
-        collectionViewOne.snp.makeConstraints { make in
-            make.top.equalTo(labelOne.snp.bottom).offset(10)
-            make.left.equalTo(view).offset(10)
-            make.right.equalTo(view).inset(10)
-            make.height.equalTo(150)
-        }
-    }
-    private func makeLabelTwo() {
-        labelTwo.snp.makeConstraints { make in
-            make.top.equalTo(collectionViewOne.snp.bottom).offset(5)
-            make.left.equalTo(view).offset(0)
-            make.width.equalTo(150)
-            make.height.equalTo(40)
-        }
-    }
-    private func makeSegmentTwo() {
-        segmentControlTwo.snp.makeConstraints { make in
-            make.top.equalTo(collectionViewOne.snp.bottom).offset(5)
-            make.left.equalTo(labelOne.snp.right).offset(5)
-            make.height.equalTo(35)
-            make.width.equalTo(180)
-        }
-    }
-    private func makeCollectionViewTwo() {
-        collectionViewTwo.snp.makeConstraints { make in
-            make.top.equalTo(labelTwo.snp.bottom).offset(10)
-            make.left.equalTo(view).offset(10)
-            make.right.equalTo(view).inset(10)
-            make.height.equalTo(150)
-        }
-    }
-    private func makeLabelThree() {
-        labelThree.snp.makeConstraints { make in
-            make.top.equalTo(collectionViewTwo.snp.bottom).offset(5)
-            make.left.equalTo(view).offset(0)
-            make.width.equalTo(150)
-            make.height.equalTo(40)
-        }
-    }
-    private func makeSegmentThree() {
-        segmentControlThree.snp.makeConstraints { make in
-            make.top.equalTo(collectionViewTwo.snp.bottom).offset(5)
-            make.left.equalTo(labelOne.snp.right).offset(5)
-            make.height.equalTo(35)
-            make.width.equalTo(180)
-        }
-    }
-    private func makeCollectionViewThree() {
-        collectionViewThree.snp.makeConstraints { make in
-            make.top.equalTo(labelThree.snp.bottom).offset(10)
-            make.left.equalTo(view).offset(10)
-            make.right.equalTo(view).inset(10)
-            make.height.equalTo(150)
-        }
-    }
     private func makeScrollView() {
+        scrollView.addSubview(labelOne)
+        scrollView.addSubview(segmentControlOne)
+        scrollView.addSubview(collectionViewOne)
+        scrollView.addSubview(labelTwo)
+        scrollView.addSubview(segmentControlTwo)
+        scrollView.addSubview(collectionViewTwo)
+        scrollView.addSubview(labelThree)
+        scrollView.addSubview(segmentControlThree)
+        scrollView.addSubview(collectionViewThree)
         
+            labelOne.snp.makeConstraints { make in
+                make.top.equalTo(scrollView.snp.top).offset(5)
+                make.left.equalTo(view).offset(0)
+                make.width.equalTo(150)
+                make.height.equalTo(40)
+            }
+            segmentControlOne.snp.makeConstraints { make in
+                make.top.equalTo(scrollView.snp.top).offset(5)
+                make.left.equalTo(labelOne.snp.right).offset(5)
+                make.height.equalTo(35)
+                make.width.equalTo(180)
+            }
+            collectionViewOne.snp.makeConstraints { make in
+                make.top.equalTo(labelOne.snp.bottom).offset(10)
+                make.left.equalTo(view).offset(0)
+                make.right.equalTo(view).offset(0)
+                make.height.equalTo(200)
+            }
+            labelTwo.snp.makeConstraints { make in
+                make.top.equalTo(collectionViewOne.snp.bottom).offset(5)
+                make.left.equalTo(view).offset(0)
+                make.width.equalTo(150)
+                make.height.equalTo(40)
+            }
+            segmentControlTwo.snp.makeConstraints { make in
+                make.top.equalTo(collectionViewOne.snp.bottom).offset(5)
+                make.left.equalTo(labelOne.snp.right).offset(5)
+                make.height.equalTo(35)
+                make.width.equalTo(180)
+            }
+            collectionViewTwo.snp.makeConstraints { make in
+                make.top.equalTo(labelTwo.snp.bottom).offset(10)
+                make.left.equalTo(view).offset(0)
+                make.right.equalTo(view).offset(0)
+                make.height.equalTo(200)
+            }
+            labelThree.snp.makeConstraints { make in
+                make.top.equalTo(collectionViewTwo.snp.bottom).offset(5)
+                make.left.equalTo(view).offset(0)
+                make.width.equalTo(150)
+                make.height.equalTo(40)
+            }
+            segmentControlThree.snp.makeConstraints { make in
+                make.top.equalTo(collectionViewTwo.snp.bottom).offset(5)
+                make.left.equalTo(labelOne.snp.right).offset(5)
+                make.height.equalTo(35)
+                make.width.equalTo(180)
+            }
+            collectionViewThree.snp.makeConstraints { make in
+                make.top.equalTo(labelThree.snp.bottom).offset(10)
+                make.left.equalTo(view).offset(0)
+                make.right.equalTo(view).offset(0)
+                make.height.equalTo(200)
+            }
+        
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(0)
+            make.left.equalTo(view).offset(0)
+            make.right.equalTo(view).offset(0)
+            make.bottom.equalTo(view).offset(0)
+        }
     }
-  
 }
+

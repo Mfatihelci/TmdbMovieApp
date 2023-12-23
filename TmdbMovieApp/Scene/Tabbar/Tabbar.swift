@@ -17,6 +17,9 @@ class Tabbar: UITabBarController {
     private func setupApperance() {
         tabBar.tintColor = .white
         tabBar.barTintColor = .black
+        tabBar.isTranslucent = false
+        tabBar.itemWidth = view.frame.width / 5
+        
     }
     
     //MARK: - Setup ViewController
